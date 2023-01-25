@@ -21,17 +21,16 @@ namespace WpfClient.Views
     /// </summary>
     public partial class ChatLayout : UserControl
     {
-        ChatLayoutViewModel _viewModel;
 
         public ChatLayout()
         {
             InitializeComponent();
         }
 
-        public ChatLayout(SVC.Client currentPerson)
+        public ChatLayout(ChatViewModel _viewModel)
         {
             InitializeComponent();
-            DataContext = _viewModel = new ChatLayoutViewModel(currentPerson);
+            this.DataContext = _viewModel;
         }
     }
 }

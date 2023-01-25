@@ -17,69 +17,69 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace WpfClient.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged, SVC.IChatCallback
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public SVC.ChatClient proxy = null;
         public SVC.Client receiver = null;
         public SVC.Client localClient = null;
 
-        public void ConnectProxy()
-        {
-            InstanceContext context = new InstanceContext(this);
-            proxy = new SVC.ChatClient(context);
-            string servicePath = proxy.Endpoint.ListenUri.AbsolutePath;
-            string serviceListenPort = proxy.Endpoint.Address.Uri.Port.ToString();
+        //public void ConnectProxy()
+        //{
+        //    InstanceContext context = new InstanceContext(this);
+        //    proxy = new SVC.ChatClient(context);
+        //    string servicePath = proxy.Endpoint.ListenUri.AbsolutePath;
+        //    string serviceListenPort = proxy.Endpoint.Address.Uri.Port.ToString();
 
-            proxy.Endpoint.Address = new EndpointAddress("net.tcp://" + _IpTxt + ":" + serviceListenPort + servicePath);
+        //    proxy.Endpoint.Address = new EndpointAddress("net.tcp://" + _IpTxt + ":" + serviceListenPort + servicePath);
 
-            proxy.Open();
-        }
+        //    proxy.Open();
+        //}
 
         public Dictionary<ListBoxItem, SVC.Client> OnlineClients = new Dictionary<ListBoxItem, Client>();
 
-        private ObservableCollection<ListBoxItem> _users;
-        public ObservableCollection<ListBoxItem> UsersList
-        {
-            get { return _users; }
-            set
-            {
-                _users = value;
-                SetProperty(ref _users, value);
-            }
-        }
+        //private ObservableCollection<ListBoxItem> _users;
+        //public ObservableCollection<ListBoxItem> UsersList
+        //{
+        //    get { return _users; }
+        //    set
+        //    {
+        //        _users = value;
+        //        SetProperty(ref _users, value);
+        //    }
+        //}
 
-        private ObservableCollection<Message> _messageList;
-        public ObservableCollection<Message> MessageList
-        {
-            get { return _messageList; }
-            set
-            {
-                _messageList = value;
-                SetProperty(ref _messageList, value);
-            }
-        }
+        //private ObservableCollection<Message> _messageList;
+        //public ObservableCollection<Message> MessageList
+        //{
+        //    get { return _messageList; }
+        //    set
+        //    {
+        //        _messageList = value;
+        //        SetProperty(ref _messageList, value);
+        //    }
+        //}
 
-        private string _connectedWith;
-        public string ConnectedWith
-        {
-            get { return _connectedWith; }
-            set
-            {
-                _connectedWith = value;
-                SetProperty(ref _connectedWith, value);
-            }
-        }
+        //private string _connectedWith;
+        //public string ConnectedWith
+        //{
+        //    get { return _connectedWith; }
+        //    set
+        //    {
+        //        _connectedWith = value;
+        //        SetProperty(ref _connectedWith, value);
+        //    }
+        //}
 
-        private string _IpTxt = "localhost";
-        public string IpTxt
-        {
-            get { return _IpTxt; }
-            set
-            {
-                _IpTxt = value;
-                SetProperty(ref _IpTxt, value);
-            }
-        }
+        //private string _IpTxt = "localhost";
+        //public string IpTxt
+        //{
+        //    get { return _IpTxt; }
+        //    set
+        //    {
+        //        _IpTxt = value;
+        //        SetProperty(ref _IpTxt, value);
+        //    }
+        //}
 
         #region INotifyPropertyChanged
         protected bool SetProperty<T>(ref T backingStore, T value,
@@ -186,99 +186,99 @@ namespace WpfClient.ViewModels
         }
         #endregion
 
-        #region ICallBackMembers
+        //#region ICallBackMembers
 
-        public void IsWritingCallback(Client client)
-        {
-            throw new NotImplementedException();
-        }
+        //public void IsWritingCallback(Client client)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Receive(Message msg)
-        {
-            foreach (SVC.Client c in this.OnlineClients.Values)
-            {
-                if (c.Name == msg.Sender)
-                {
-                    if (_messageList == null)
-                    {
-                        _messageList = new ObservableCollection<Message>();
-                    }
-                    //ListBoxItem item = MakeItem(msg.Sender + " : " + msg.Content);
-                    _messageList.Add(msg);
-                }
-            }
-        }
+        //public void Receive(Message msg)
+        //{
+        //    foreach (SVC.Client c in this.OnlineClients.Values)
+        //    {
+        //        if (c.Name == msg.Sender)
+        //        {
+        //            if (_messageList == null)
+        //            {
+        //                _messageList = new ObservableCollection<Message>();
+        //            }
+        //            //ListBoxItem item = MakeItem(msg.Sender + " : " + msg.Content);
+        //            _messageList.Add(msg);
+        //        }
+        //    }
+        //}
 
-        public void ReceiveWhisper(Message msg, Client receiver)
-        {
-            throw new NotImplementedException();
-        }
+        //public void ReceiveWhisper(Message msg, Client receiver)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void RefreshClients(List<Client> clients)
-        {
-            if (_users == null)
-            {
-                _users = new ObservableCollection<ListBoxItem>(new List<ListBoxItem> { MakeItem("Test") });
-            }
-            UsersList.Clear();
-            OnlineClients.Clear();
-            foreach (SVC.Client c in clients)
-            {
-                ListBoxItem item = MakeItem(c.Name);
-                _users.Add(item);
-                OnlineClients.Add(item, c);
-            }
-        }
+        //public void RefreshClients(List<Client> clients)
+        //{
+        //    if (_users == null)
+        //    {
+        //        _users = new ObservableCollection<ListBoxItem>(new List<ListBoxItem> { MakeItem("Test") });
+        //    }
+        //    UsersList.Clear();
+        //    OnlineClients.Clear();
+        //    foreach (SVC.Client c in clients)
+        //    {
+        //        ListBoxItem item = MakeItem(c.Name);
+        //        _users.Add(item);
+        //        OnlineClients.Add(item, c);
+        //    }
+        //}
 
-        public void UserJoin(Client client)
-        {
-            ConnectedWith = $"Connected with {localClient.Name}";
-        }
+        //public void UserJoin(Client client)
+        //{
+        //    ConnectedWith = $"Connected with {localClient.Name}";
+        //}
 
-        public void UserLeave(Client client)
-        {
+        //public void UserLeave(Client client)
+        //{
             
-        }
-        #endregion
+        //}
+        //#endregion
 
-        private ListBoxItem MakeItem(string text)
-        {
-            ListBoxItem item = new ListBoxItem();
+        //private ListBoxItem MakeItem(string text)
+        //{
+        //    ListBoxItem item = new ListBoxItem();
 
-            TextBlock txtblock = new TextBlock();
-            txtblock.Text = text;
-            txtblock.VerticalAlignment = VerticalAlignment.Center;
+        //    TextBlock txtblock = new TextBlock();
+        //    txtblock.Text = text;
+        //    txtblock.VerticalAlignment = VerticalAlignment.Center;
 
-            StackPanel panel = new StackPanel();
-            panel.Orientation = Orientation.Horizontal;
-            panel.Children.Add(item);
-            panel.Children.Add(txtblock);
+        //    StackPanel panel = new StackPanel();
+        //    panel.Orientation = Orientation.Horizontal;
+        //    panel.Children.Add(item);
+        //    panel.Children.Add(txtblock);
 
-            ListBoxItem bigItem = new ListBoxItem();
-            bigItem.Content = panel;
+        //    ListBoxItem bigItem = new ListBoxItem();
+        //    bigItem.Content = panel;
 
-            return bigItem;
-        }
+        //    return bigItem;
+        //}
 
-        private ScrollViewer FindVisualChild(DependencyObject obj)
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is ScrollViewer)
-                {
-                    return (ScrollViewer)child;
-                }
-                else
-                {
-                    ScrollViewer childOfChild = FindVisualChild(child);
-                    if (childOfChild != null)
-                    {
-                        return childOfChild;
-                    }
-                }
-            }
-            return null;
-        }
+        //private ScrollViewer FindVisualChild(DependencyObject obj)
+        //{
+        //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+        //    {
+        //        DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+        //        if (child != null && child is ScrollViewer)
+        //        {
+        //            return (ScrollViewer)child;
+        //        }
+        //        else
+        //        {
+        //            ScrollViewer childOfChild = FindVisualChild(child);
+        //            if (childOfChild != null)
+        //            {
+        //                return childOfChild;
+        //            }
+        //        }
+        //    }
+        //    return null;
+        //}
     }
 }

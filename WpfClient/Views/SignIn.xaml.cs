@@ -21,11 +21,11 @@ namespace WpfClient.Views
     /// </summary>
     public partial class SignIn : UserControl
     {
-        SignInViewModel _viewModel;
+        ChatViewModel _viewModel;
         public SignIn()
         {
             InitializeComponent();
-            DataContext = _viewModel = new SignInViewModel();
+            this.DataContext = _viewModel = new ChatViewModel();
         }
     }
 }

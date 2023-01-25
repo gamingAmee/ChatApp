@@ -58,9 +58,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ChatLayoutViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="Views\ChatLayout.xaml.cs">
       <DependentUpon>ChatLayout.xaml</DependentUpon>
     </Compile>
