@@ -21,9 +21,6 @@ namespace WpfClient.ViewModels
     public class ChatViewModel : BaseViewModel, SVC.IChatCallback
     {
         private MainWindow _window;
-        //public SVC.ChatClient proxy = null;
-        //public SVC.Client receiver = null;
-        //public SVC.Client localClient = null;
         public ObservableCollection<SVC.Client> Users { get; set; }
         public ChatViewModel()
         {
