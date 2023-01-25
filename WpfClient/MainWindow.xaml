@@ -3,10 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfClient"
-        mc:Ignorable="d"
+		xmlns:local="clr-namespace:WpfClient.Views"
+		mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+	<Grid Name="Main">
+		<local:SignIn x:Name="SignInControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+		<local:ChatLayout x:Name="ChatLayout" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+			<local:ChatLayout.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform ScaleX="1" ScaleY="1"/>
+					<SkewTransform AngleX="0" AngleY="0"/>
+					<RotateTransform Angle="0"/>
+					<TranslateTransform X="0" Y="0"/>
+				</TransformGroup>
+			</local:ChatLayout.RenderTransform>
+		</local:ChatLayout>
+	</Grid>
 </Window>

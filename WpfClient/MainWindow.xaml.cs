@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfClient.ViewModels;
 
 namespace WpfClient
 {
@@ -20,9 +21,22 @@ namespace WpfClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel _viewModel;
+        public MainWindow MainView { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = _viewModel = new MainWindowViewModel();
         }
+        public MainWindow(MainWindow window, SVC.Client currentClient)
+        {
+            DataContext = _viewModel = new MainWindowViewModel();
+            this.Window = window;
+            this.CurrentClient = currentClient;
+        }
+
+        public MainWindow Window { get; }
+        public SVC.Client CurrentClient { get; }
     }
 }
