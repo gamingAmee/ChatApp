@@ -71,11 +71,6 @@ namespace WpfClient.ViewModels
             }
         }
 
-        public void Test()
-        {
-
-        }
-
         private async void SendMessageBtnClick(object obj)
         {
             Message message = new Message();
@@ -85,7 +80,7 @@ namespace WpfClient.ViewModels
             ConnectProxy();
 
             await proxy.SayAsync(message);
-            proxy.IsWriting(null);
+            await proxy.IsWritingAsync(null);
         }
     }
 }

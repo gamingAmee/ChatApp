@@ -48,8 +48,8 @@ namespace WpfClient.ViewModels
             }
         }
 
-        private ObservableCollection<ListBoxItem> _messageList;
-        public ObservableCollection<ListBoxItem> MessageList
+        private ObservableCollection<Message> _messageList;
+        public ObservableCollection<Message> MessageList
         {
             get { return _messageList; }
             set
@@ -201,10 +201,10 @@ namespace WpfClient.ViewModels
                 {
                     if (_messageList == null)
                     {
-                        _messageList = new ObservableCollection<ListBoxItem>();
+                        _messageList = new ObservableCollection<Message>();
                     }
-                    ListBoxItem item = MakeItem(msg.Sender + " : " + msg.Content);
-                    _messageList.Add(item);
+                    //ListBoxItem item = MakeItem(msg.Sender + " : " + msg.Content);
+                    _messageList.Add(msg);
                 }
             }
         }
