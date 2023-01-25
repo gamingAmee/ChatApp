@@ -131,7 +131,6 @@ namespace WpfClient.ViewModels
 
         #endregion
 
-
         #region SignIn
 
         private string _IpTxt = "localhost";
