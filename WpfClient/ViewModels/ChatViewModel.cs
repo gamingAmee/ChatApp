@@ -171,14 +171,9 @@ namespace WpfClient.ViewModels
             {
                 this.localClient = new SVC.Client();
                 this.localClient.Name = _username;
-                _window.MainView = new MainWindow(_window, this.localClient);
 
                 ConnectProxy();
                 await proxy.ConnectAsync(this.localClient);
-
-                _window.Main.Children.Clear();
-                ChatLayout chatLayout = new ChatLayout(this);
-                _window.Main.Children.Add(chatLayout);
             }
         }
 
@@ -218,8 +213,10 @@ namespace WpfClient.ViewModels
                 {
                     ListBoxItem item = MakeItem($"{c.Name} : {msg.Content}");
                     _messages.Add(item);
+                    _txtMessage = "";
                 }
             }
+            Refresh();
         }
 
         public void ReceiveWhisper(Message msg, Client receiver)
@@ -241,6 +238,7 @@ namespace WpfClient.ViewModels
                 _users.Add(item);
                 OnlineClients.Add(item, c);
             }
+            Refresh();
         }
 
         public void UserJoin(Client client)
@@ -270,6 +268,12 @@ namespace WpfClient.ViewModels
 
             return Item;
         }
-
+        private void Refresh()
+        {
+            _window.MainView = new MainWindow(_window, this.localClient);
+            _window.Main.Children.Clear();
+            ChatLayout chatLayout = new ChatLayout(this);
+            _window.Main.Children.Add(chatLayout);
+        }
     }
 }

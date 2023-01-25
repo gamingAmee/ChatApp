@@ -18,8 +18,8 @@
 			<Label Name="Title" Content="{Binding ConnectedWith}" Background="Gray" HorizontalContentAlignment="Right" Margin="1"></Label>
 		</Grid>
 		<Grid Grid.Row="1" Background="#bdbdbd">
-			<ListBox x:Name="chatListBoxMsgs" Margin="10,62,167,84" ItemsSource="{Binding MessageList, Mode=TwoWay}"/>
-			<ListBox HorizontalAlignment="Right" x:Name="chatListboxUsernames" Margin="0,62,10,84" Width="139" ItemsSource="{Binding UsersList}"/>
+            <ListBox x:Name="chatListBoxMsgs" Margin="10,62,167,84" ItemsSource="{Binding MessageList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListBox HorizontalAlignment="Right" x:Name="chatListboxUsernames" Margin="0,62,10,84" Width="139" ItemsSource="{Binding UsersList}"/>
 			<TextBox x:Name="chatTxtBoxType" Height="39" Margin="10,0,313,9" VerticalAlignment="Bottom" Text="{Binding TxtMessage}" />
 			<Button x:Name="chatButtonSend" Command="{Binding SendMessageClickCommand}" Height="39" Margin="0,0,167,9" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="136">Send</Button>
 		</Grid>
